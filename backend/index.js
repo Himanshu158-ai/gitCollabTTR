@@ -30,7 +30,6 @@ app.post('/signup', async (req, res) => {
     }
 
     return res.send({userId: user._id});
-
 })
 
 app.listen(3000, (req, res) => {
