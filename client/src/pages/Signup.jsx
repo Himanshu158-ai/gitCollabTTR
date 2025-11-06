@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export const Login = () => {
+export const Signup = () => {
     const [name, setname] = useState(``);
     const [pass, setpass] = useState(``);
 
     async function Onsubmit() {
         try {
-            const response = await axios.post("http://localhost:3000/login", {
+            const response = await axios.post("http://localhost:3000/signup", {
                 name,
                 pass,
             });
