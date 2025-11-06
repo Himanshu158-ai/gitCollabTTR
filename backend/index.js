@@ -11,15 +11,18 @@ app.get("/", (req, res) => {
     res.send("htt bsdk");
 });
 
-app.post("/login", async (req, res) => {
-    let { name } = req.body;
-    const newuser = new User({ name });
+app.post("/signup", async (req, res) => {
+    let { name,pass } = req.body;
+    const newuser = new User({ name,pass });
     await newuser.save();
     res.json({ reply: `hello ${name}` });
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/login", async (req, res) => {
     let { name, pass } = req.body;
+    if(!name || !pass){
+        return res.status(401).send({ msg: "All field required..." });
+    }
     const user = await User.findOne({ name });
     if (!user) {
         return res.status(401).send({ msg: "invalid credintial" });

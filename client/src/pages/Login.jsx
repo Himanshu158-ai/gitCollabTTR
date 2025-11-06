@@ -11,7 +11,7 @@ export const Login = () => {
                 name,
                 pass,
             });
-            console.log(response.data.reply);
+            console.log(response.data?.userId);
         } catch (error) {
             console.log(error);
         }
