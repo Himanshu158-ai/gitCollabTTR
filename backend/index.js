@@ -1,11 +1,15 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const User = require("./src/db/model");
 
+const User = require("./src/db/model");
+const connectDB = require('./config/connectDB')
 app.use(cors());
 app.use(express.json());
+
+connectDB()
 
 app.get("/", (req, res) => {
     res.send("htt bsdk");
@@ -13,9 +17,8 @@ app.get("/", (req, res) => {
 
 app.post("/signup", async (req, res) => {
     let { name,pass } = req.body;
-    const newuser = new User({ name,pass });
-    await newuser.save();
-    res.json({ reply: `hello ${name}` });
+    const newUser = await User.create({ name,pass });
+    res.status(201).json({message:"user created successfully",newUser})
 });
 
 app.post("/login", async (req, res) => {
@@ -32,7 +35,7 @@ app.post("/login", async (req, res) => {
         return res.status(400).send("invalid credintial");
     }
 
-    return res.send({ userId: user._id });
+    return res.status(200).json({ user:user });
 });
 
 app.listen(3000, (req, res) => {
