@@ -15,6 +15,11 @@ export const Login = () => {
                 name,
                 pass,
             });
+            Swal.fire({
+                title: "Success",
+                text: response.data?.userId,
+                icon: "success",
+            });
             console.log(response.data?.userId);
         } catch (error) {
             console.log(error);
