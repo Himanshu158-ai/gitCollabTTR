@@ -5,6 +5,10 @@ export const Login = () => {
     const [name, setname] = useState(``);
     const [pass, setpass] = useState(``);
 
+    /**
+     * The function `Onsubmit` sends a POST request to a local server endpoint `/login` with user
+     * credentials and logs the response data's `userId` if successful.
+     */
     async function Onsubmit() {
         try {
             const response = await axios.post("http://localhost:3000/login", {
